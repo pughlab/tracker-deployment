@@ -1,0 +1,6 @@
+---
+- hosts: all
+  remote_user: root
+  vars_files:
+    - "vars/common.yml"
+    - [ "vars/{{ansible_os_family|lower}}.yml", "vars/os_defaults.yml" ]

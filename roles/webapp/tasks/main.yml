@@ -1,0 +1,57 @@
+---
+- name: Webapp | Install required components
+  apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
+  when: ansible_os_family == "Debian"
+  with_items:
+  - git
+
+- name: Webapp | Create directories
+  shell: mkdir -p {{ item.path }} creates={{ item.path }}
+  with_items:
+    - { path: '{{webapp_directory}}' }
+    - { path: '{{webapp_log_directory}}' }
+    - { path: '{{webapp_pid_directory}}' }
+    - { path: '{{webapp_directory}}/data' }
+
+- name: Webapp | Copy files
+  synchronize:
+    src: "{{ item.source}}"
+    dest: "{{ item.dest }}"
+    rsync_path: 'sudo rsync'
+  with_items:
+    - { source: './dist/', dest: '{{webapp_directory}}' }
+    - { source: './migrations/', dest: '{{webapp_directory}}/migrations' }
+
+- name: Webapp | Install dependencies
+  command: npm install --production chdir={{webapp_directory}}
+
+- name: Webapp | Install forever
+  command: npm install forever -g chdir={{webapp_directory}}
+
+- name: Webapp | Copy knexfile
+  template: src=knexfile.coffee.j2 dest={{webapp_directory}}/knexfile.coffee
+
+- name: Webapp | Update the database
+  command: node_modules/.bin/knex --env production migrate:latest chdir={{webapp_directory}}
+
+- name: Webapp | Write configuration files
+  template: src={{ item.src }} dest={{ item.dest }} mode={{ item.mode }}
+  notify:
+    - restart service
+  with_items:
+    - { src: "webapp.config.j2", dest: "{{webapp_service_config}}", mode: '0644' }
+    - { src: "webapp.init.j2", dest: "{{webapp_service_init}}", mode: '0755' }
+
+- name: Webapp | Create user
+  user: name={{webapp_service_user}} comment="{{webapp_service_user}} webapp" state=present
+
+- name: Webapp | Assign files to the user
+  file: path={{ item.path }} recurse=yes owner={{webapp_service_user}} group=adm mode={{ item.mode }}
+  with_items:
+    - { path: '{{webapp_log_directory}}', mode: '0750' }
+    - { path: '{{webapp_pid_directory}}', mode: '0750' }
+    - { path: '{{webapp_directory}}', mode: '0755' }
+    - { path: '{{webapp_directory}}/data', mode: '0777' }
+
+- name: Webapp | ensure the service is running
+  service: name={{webapp_service_name}} state=started enabled=yes
