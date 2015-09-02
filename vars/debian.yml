@@ -5,3 +5,6 @@ webapp_pid_directory: '/var/run/{{webapp_service_name}}'
 
 webapp_service_config: '/etc/default/{{webapp_service_name}}.xml'
 webapp_service_init: '/etc/init.d/{{webapp_service_name}}'
+
+install_database: true
+install_java: true

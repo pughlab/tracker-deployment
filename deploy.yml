@@ -15,12 +15,22 @@
   tasks:
   - name: Selected layout
     debug:
-      msg: "echo {{app_layout}}"
+      msg: "Value: {{app_layout}}"
 
   - name: Selected tracker release
     debug:
-      msg: "echo {{tracker_release}}"
+      msg: "Value: {{tracker_release}}"
 
   - name: Selected target directory
     debug:
-      msg: "echo {{webapp_directory}}"
+      msg: "Value: {{webapp_directory}}"
+
+  - name: Install Java?
+    debug:
+      msg: "Value: {{install_java}}"
+
+- hosts: all
+  roles:
+    - { role: database, tags: [ 'database' ], when: install_database == true }
+    - { role: java, tags: [ 'java' ], when: install_java == true }
+    - { role: webapp, tags: [ 'webapp' ] }
