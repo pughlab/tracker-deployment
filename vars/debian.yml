@@ -3,5 +3,5 @@ webapp_directory: '/usr/lib/{{webapp_service_name}}'
 webapp_log_directory: '/var/log/{{webapp_service_name}}'
 webapp_pid_directory: '/var/run/{{webapp_service_name}}'
 
-webapp_service_config: '/etc/default/{{webapp_service_name}}.json'
+webapp_service_config: '/etc/default/{{webapp_service_name}}.xml'
 webapp_service_init: '/etc/init.d/{{webapp_service_name}}'
