@@ -4,7 +4,9 @@ tracker_version: '2.0.1-RC2'
 tracker_server_version: '1.0.0-RELEASE'
 
 ## Source URLs for the tracker and server releases
-tracker_release: 'https://github.com/pughlab/tracker/releases/download/{{tracker_version}}/tracker-java-restlet-{{tracker_version}}.war'
+tracker_repository: 'https://github.com/pughlab/tracker'
+tracker_release_base: '{{tracker_repository}}/releases/download/{{tracker_version}}'
+tracker_release: '{{tracker_release_base}}/tracker-java-restlet-{{tracker_version}}.war'
 tracker_server_release: 'https://github.com/pughlab/tracker-server/releases/download/{{tracker_server_version}}/tracker-server-{{tracker_server_version}}.jar'
 
 ## Database variables
@@ -26,3 +28,4 @@ app_layout: 'default'
 install_database: true
 install_java: true
 install_user: true
+install_service: true
