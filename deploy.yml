@@ -1,7 +1,15 @@
 ---
 - hosts: all
+  tasks:
+    - name: Local variables
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "vars/local_layout_{{app_layout}}.yml"
+        - "vars/{{ansible_os_family|lower}}.yml"
+        - "vars/defaults.yml"
+
+- hosts: all
   roles:
-  roles:
-    # - { role: database, tags: [ 'database' ], when: install_database }
-    # - { role: java, tags: [ 'java' ], when: install_java }
+    - { role: database, tags: [ 'database' ], when: install_database }
+    - { role: java, tags: [ 'java' ], when: install_java }
     - { role: webapp, tags: [ 'webapp' ] }
