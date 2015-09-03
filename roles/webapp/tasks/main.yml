@@ -19,7 +19,7 @@
     url: "{{item.url}}"
     dest: "{{item.dest}}"
   with_items:
-    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-{{tracker_version}}.jar" }
+    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" }
     - { url: "{{tracker_server_release}}", dest: "{{webapp_directory}}/tracker-server-{{tracker_version}}.jar" }
 
 - name: Webapp | Get database schema
@@ -36,8 +36,8 @@
   notify:
     - restart service
   with_items:
-    - { src: "tracker.xml.j2", dest: "{{webapp_service_config}}", mode: '0644' }
-    - { src: "init.d.j2", dest: "{{webapp_service_config}}", mode: '0644' }
+    - { src: "tracker.xml.j2", dest: "{{webapp_service_config}}/tracker.xml", mode: '0644' }
+    - { src: "init.d.j2", dest: "{{webapp_service_config}}/init.d", mode: '0644' }
 
 - name: Webapp | Create user
   user:
