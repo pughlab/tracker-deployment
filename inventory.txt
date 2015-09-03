@@ -2,4 +2,4 @@
 localhost           ansible_connection=local app_layout=test
 
 [oicr]
-localhost           ansible_ssh_port=8022 app_layout=oicr
+localhost           ansible_ssh_port=8022 ansible_ssh_user=swatt app_layout=oicr
