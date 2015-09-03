@@ -4,7 +4,7 @@ tracker_version: '2.0.1-RC2'
 tracker_server_version: '1.0.0-RELEASE'
 
 ## Source URLs for the tracker and server releases
-tracker_release: 'https://github.com/pughlab/tracker/releases/download/{{tracker_version}}/tracker-{{tracker_version}}.jar'
+tracker_release: 'https://github.com/pughlab/tracker/releases/download/{{tracker_version}}/tracker-java-restlet-{{tracker_version}}.war'
 tracker_server_release: 'https://github.com/pughlab/tracker-server/releases/download/{{tracker_server_version}}/tracker-server-{{tracker_server_version}}.jar'
 
 ## Database variables
@@ -18,3 +18,11 @@ mysql_database_password: 'xxx'
 ## Webapp variables
 webapp_service_name: 'tracker'
 webapp_service_user: '{{webapp_service_name}}'
+
+## Default layout file
+app_layout: 'default'
+
+## System variables
+install_database: true
+install_java: true
+install_user: true

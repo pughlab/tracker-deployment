@@ -36,11 +36,6 @@
     state: started
     enabled: true
 
-- name: MySQL | Copy initialization file
-  template:
-    src: init.sql.j2
-    dest: /tmp/init.sql
-
 - name: MySQL | Create the database
   mysql_db:
     name: "{{mysql_database_name}}"

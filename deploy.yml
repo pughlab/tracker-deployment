@@ -1,36 +1,7 @@
 ---
 - hosts: all
-  tasks:
-  - name: Common variables
-    include_vars: vars/common.yml
-
-  - name: Local variables
-    include_vars: "{{ item }}"
-    with_first_found:
-      - "vars/local_layout_{{app_layout}}.yml"
-      - "vars/{{ansible_os_family|lower}}.yml"
-      - "vars/defaults.yml"
-
-- hosts: all
-  tasks:
-  - name: Selected layout
-    debug:
-      msg: "Value: {{app_layout}}"
-
-  - name: Selected tracker release
-    debug:
-      msg: "Value: {{tracker_release}}"
-
-  - name: Selected target directory
-    debug:
-      msg: "Value: {{webapp_directory}}"
-
-  - name: Install Java?
-    debug:
-      msg: "Value: {{install_java}}"
-
-- hosts: all
   roles:
-    - { role: database, tags: [ 'database' ], when: install_database == true }
-    - { role: java, tags: [ 'java' ], when: install_java == true }
+  roles:
+    # - { role: database, tags: [ 'database' ], when: install_database }
+    # - { role: java, tags: [ 'java' ], when: install_java }
     - { role: webapp, tags: [ 'webapp' ] }

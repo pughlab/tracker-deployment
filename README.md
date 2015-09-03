@@ -41,4 +41,4 @@ On a regular server:
    to a host in the inventory file. This will include a `local_layout_xxx.yml` file
    of variables, which can override defaults appropriate to a given OS. These files are
    ignored by `git`. This allows you to set up your own layout in an inventory file,
-   and manage it any way you choose. 
+   and manage it any way you choose.
