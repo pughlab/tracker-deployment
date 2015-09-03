@@ -57,7 +57,6 @@
     - { path: '{{webapp_log_directory}}', mode: '0750' }
     - { path: '{{webapp_pid_directory}}', mode: '0750' }
     - { path: '{{webapp_directory}}', mode: '0755' }
-    - { path: '{{webapp_directory}}/data', mode: '0777' }
   when: install_user == true
 
 - name: Webapp | ensure the service is running
