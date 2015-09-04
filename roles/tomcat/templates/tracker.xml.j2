@@ -6,7 +6,7 @@ You probably want to put this somewhere like:
 $CATALINA_HOME/conf/Catalina/localhost/
 -->
 
-<Context path="" docBase="tracker-java-restlet-2.0.1-RC2.war" debug="0" reloadable="true">
+<Context path="" docBase="{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" reloadable="true">
   <Valve className="org.apache.catalina.valves.AccessLogValve"
          prefix="localhost_access_log." suffix=".txt"
          pattern="common"/>
@@ -18,8 +18,8 @@ $CATALINA_HOME/conf/Catalina/localhost/
 
   <!-- Resources -->
   <Resource name="jdbc/TrackerDB"
+            type="javax.sql.DataSource"
             auth="Container"
-            type="org.apache.commons.dbcp.BasicDataSource"
             description="Tracker Database"
             driverClassName="com.mysql.jdbc.Driver"
             url="jdbc:mysql://{{mysql_database_host}}:{{mysql_database_port}}/{{mysql_database_name}}?sessionVariables=sql_mode=&apos;ansi,strict_all_tables&apos;"

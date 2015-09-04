@@ -1,0 +1,37 @@
+---
+- name: Local variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "vars/local_layout_{{app_layout}}.yml"
+    - "vars/{{ansible_os_family|lower}}.yml"
+    - "vars/defaults.yml"
+
+- name: Tomcat webapp | Create directories
+  shell: mkdir -p {{ item.path }} creates={{ item.path }}
+  with_items:
+    - { path: '{{webapp_directory}}' }
+    - { path: '{{webapp_log_directory}}' }
+    - { path: '{{webapp_pid_directory}}' }
+    - { path: '{{webapp_service_config}}' }
+
+- name: Tomcat webapp | Get release files
+  get_url:
+    url: "{{item.url}}"
+    dest: "{{item.dest}}"
+  with_items:
+    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" }
+    - { url: "{{mysql_driver_url}}", dest: "{{webapp_directory}}/mysql-connector-java.jar }
+
+- name: Tomcat webapp | Get database schema
+  get_url:
+    url: "{{item.url}}"
+    dest: "{{item.dest}}"
+  with_items:
+    - { url: "{{tracker_release_base}}/initialize_mysql.sql", dest: "{{webapp_directory}}/initialize_mysql.sql" }
+
+- name: Tomcat webapp | Write configuration files
+  template: src={{ item.src }} dest={{ item.dest }} mode={{ item.mode }}
+  notify:
+    - restart service
+  with_items:
+    - { src: "tracker.xml.j2", dest: "{{webapp_service_config}}/tracker.xml", mode: '0644' }

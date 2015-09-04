@@ -1,0 +1,4 @@
+---
+mysql_driver_url: "http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.36/mysql-connector-java-5.1.36.jar"
+commons_dbcp_url: "http://repo1.maven.org/maven2/commons-dbcp/commons-dbcp/1.4/commons-dbcp-1.4.jar"
+commons_pool_url: "http://repo1.maven.org/maven2/commons-pool/commons-pool/1.6/commons-pool-1.6.jar"
