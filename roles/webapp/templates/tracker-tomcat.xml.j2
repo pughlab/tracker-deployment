@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+This is a created context file to assist with Tomcat deployment.
+You probably want to put this somewhere like:
+
+$CATALINA_HOME/conf/Catalina/localhost/
+-->
+
+<Context path="" docBase="tracker-java-restlet-2.0.1-RC2.war" debug="0" reloadable="true">
+  <Valve className="org.apache.catalina.valves.AccessLogValve"
+         prefix="localhost_access_log." suffix=".txt"
+         pattern="common"/>
+
+  <!-- Context initialization parameters -->
+  <Parameter name="spring.profiles.active"
+             value="default,ldap_authentication"
+             override="false"/>
+
+  <!-- Resources -->
+  <Resource name="jdbc/TrackerDB"
+            auth="Container"
+            type="org.apache.commons.dbcp.BasicDataSource"
+            description="Tracker Database"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://{{mysql_database_host}}:{{mysql_database_port}}/{{mysql_database_name}}?sessionVariables=sql_mode=&apos;ansi,strict_all_tables&apos;"
+            username="{{mysql_database_user}}"
+            password="{{mysql_database_password}}"
+            testOnBorrow="true"
+            validationQuery="SELECT 1"
+            timeBetweenEvictionRunsMillis="120000"
+            minEvictableIdleTimeMillis="120000"
+  />
+</Context>
