@@ -9,6 +9,10 @@ tracker_release_base: '{{tracker_repository}}/releases/download/{{tracker_versio
 tracker_release: '{{tracker_release_base}}/tracker-java-restlet-{{tracker_version}}.war'
 tracker_server_release: 'https://github.com/pughlab/tracker-server/releases/download/{{tracker_server_version}}/tracker-server-{{tracker_server_version}}.jar'
 
+## Default locations
+webapp_directory: "{{ansible_env.HOME}}/tracker"
+helper_directory: "{{ansible_env.HOME}}/tracker"
+
 ## Database variables
 mysql_root_password: 'xxx'
 mysql_database_host: 'localhost'

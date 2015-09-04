@@ -26,7 +26,7 @@
     url: "{{item.url}}"
     dest: "{{item.dest}}"
   with_items:
-    - { url: "{{tracker_release_base}}/initialize_mysql.sql", dest: "{{webapp_directory}}/initialize_mysql.sql" }
+    - { url: "{{tracker_release_base}}/initialize_mysql.sql", dest: "{{helper_directory}}/initialize_mysql.sql" }
 
 - name: Tomcat webapp | Write configuration files
   template: src={{ item.src }} dest={{ item.dest }} mode={{ item.mode }}
