@@ -34,3 +34,4 @@
     - restart service
   with_items:
     - { src: "tracker.xml.j2", dest: "{{tomcat_context_config}}", mode: '0644' }
+    - { src: "templates/applicationContext-security.xml.j2", dest: "{{helper_directory}}/applicationContext-security.xml", mode: '0644' }
