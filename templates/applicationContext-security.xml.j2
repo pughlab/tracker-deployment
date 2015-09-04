@@ -61,7 +61,7 @@
 
     <bean id="sessionAccessFilter" class="ca.uhnresearch.pughlab.tracker.security.SessionAccessFilter">
         <property name="authcScheme" value="session" />
-        <property name="prompt" value="Please log in using either your SIMS t-id or your RIS username as appropriate." />
+        <property name="prompt" value="{{authentication.prompt}}" />
     </bean>
 
     <bean id="sessionAuthenticationFilter" class="ca.uhnresearch.pughlab.tracker.security.SessionAuthenticationFilter">
