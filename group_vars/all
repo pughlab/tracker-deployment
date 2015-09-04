@@ -29,3 +29,6 @@ install_database: true
 install_java: true
 install_user: true
 install_service: true
+
+deploy_standalone: true
+deploy_tomcat: false

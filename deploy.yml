@@ -12,4 +12,5 @@
   roles:
     - { role: database, tags: [ 'database' ], when: install_database }
     - { role: java, tags: [ 'java' ], when: install_java }
-    - { role: webapp, tags: [ 'webapp' ] }
+    - { role: webapp, tags: [ 'webapp' ], when: deploy_standalone }
+    - { role: tomcat, tags: [ 'webapp' ], when: deploy_tomcat }
