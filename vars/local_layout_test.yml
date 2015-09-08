@@ -1,0 +1,43 @@
+---
+
+webapp_directory: "{{ansible_env.HOME}}/test/tracker"
+helper_directory: "{{ansible_env.HOME}}/test"
+
+tomcat_home: "/Users/stuartw/apache-tomcat-8.0.26"
+tomcat_lib: "{{tomcat_home}}/lib"
+tomcat_context_config: "{{tomcat_home}}/conf/Catalina/localhost/ROOT.xml"
+
+install_database: false
+install_java: false
+install_user: false
+install_service: false
+
+deploy_standalone: false
+deploy_tomcat: true
+
+mysql_database_user: 'tracker'
+mysql_database_password: 'tracker'
+
+authentication:
+  prompt: "Please log in using either your SIMS t-id or your RIS username as appropriate"
+
+  servers:
+    - key: 'risLdapContext'
+      type: 'ActiveDirectory'
+      properties:
+        domain: 'ads.uhnresearch.ca'
+        ldapHost: '192.168.198.100'
+        port: 389
+        timeout: 60
+        searchTemplate: 'OU=user,OU=accounts,DC=ads,DC=uhnresearch,DC=ca'
+        filterTemplate: '(userPrincipalName={0})'
+
+    - key: 'simsLdapContext'
+      type: 'ActiveDirectory'
+      properties:
+        domain: 'uhn.ca'
+        ldapHost: '142.224.16.52'
+        port: 389
+        timeout: 60
+        searchTemplate: 'OU=UHNPeople,DC=uhn,DC=ca'
+        filterTemplate: '(userPrincipalName={0})'
