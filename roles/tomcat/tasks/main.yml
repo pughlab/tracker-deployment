@@ -17,9 +17,6 @@
     dest: "{{item.dest}}"
   with_items:
     - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" }
-    - { url: "{{mysql_driver_url}}", dest: "{{tomcat_lib}}/mysql-connector-java.jar" }
-    - { url: "{{commons_dbcp_url}}", dest: "{{tomcat_lib}}/commons-dbcp.jar" }
-    - { url: "{{commons_pool_url}}", dest: "{{tomcat_lib}}/commons-pool.jar" }
 
 - name: Tomcat webapp | Get database schema
   get_url:
@@ -35,3 +32,13 @@
   with_items:
     - { src: "tracker.xml.j2", dest: "{{tomcat_context_config}}", mode: '0644' }
     - { src: "templates/applicationContext-security.xml.j2", dest: "{{helper_directory}}/applicationContext-security.xml", mode: '0644' }
+
+- name: Tomcat webapp | Get additional library files
+  get_url:
+    url: "{{item.url}}"
+    dest: "{{item.dest}}"
+  ignore_errors: yes
+  with_items:
+    - { url: "{{mysql_driver_url}}", dest: "{{tomcat_lib}}/mysql-connector-java.jar" }
+    - { url: "{{commons_dbcp_url}}", dest: "{{tomcat_lib}}/commons-dbcp.jar" }
+    - { url: "{{commons_pool_url}}", dest: "{{tomcat_lib}}/commons-pool.jar" }
