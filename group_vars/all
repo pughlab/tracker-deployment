@@ -1,6 +1,6 @@
 ---
 
-tracker_version: '2.0.1-RC2'
+tracker_version: '2.0.1-RC3'
 tracker_server_version: '1.0.0-RELEASE'
 
 ## Source URLs for the tracker and server releases
