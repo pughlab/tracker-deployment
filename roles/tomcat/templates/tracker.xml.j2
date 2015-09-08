@@ -16,6 +16,15 @@ $CATALINA_HOME/conf/Catalina/localhost/ROOT.xml
              value="default,ldap_authentication"
              override="false"/>
 
+  <Parameter name="contextConfigLocation"
+             value="WEB-INF/applicationContext.xml
+			              WEB-INF/applicationContextDatabase.xml
+              			WEB-INF/applicationContextAPIRouter.xml
+              			WEB-INF/applicationContextScheduler.xml
+                    file://{{helper_directory}}/applicationContext-security.xml
+             "
+             override="false"/>
+
   <!-- Resources -->
   <Resource name="jdbc/TrackerDB"
             type="javax.sql.DataSource"

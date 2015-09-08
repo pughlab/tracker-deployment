@@ -81,13 +81,25 @@
     </bean>
 
 {% for server in authentication.servers %}
-
+{% if server.type == 'ActiveDirectory' %}
     <bean id="{{ server.key }}" class="ca.uhnresearch.pughlab.tracker.security.DomainLdapContext">
-    {% for property in server.properties %}
-        <property name="{{property.key}}" value="{{property.value}}" />
-    {% endfor %}
+		  {% for property in ['domain', 'ldapHost', 'port', 'timeout', 'searchTemplate', 'filterTemplate' ] %}
+		  {% if server.properties[property] %}<property name="{{property}}" value="{{server.properties[property]}}" />{% endif %}
+			{% endfor %}
     </bean>
-
+{% endif %}
+{% if server.type == 'LDAP' %}
+    <bean id="{{ server.key }}ContextFactory" class="org.apache.shiro.realm.ldap.JndiLdapContextFactory">
+  	    <property name="url" value="{{ server.properties.url }}" />
+				<property name="authenticationMechanism" value="{{ server.properties.authenticationMechanism }}" />
+		</bean>
+    <bean id="{{ server.key }}" class="org.apache.shiro.realm.ldap.JndiLdapRealm">
+			  <property name="contextFactory" ref="{{ server.key }}ContextFactory" />
+				{% for property in ['userDnTemplate' ] %}
+				{% if server.properties[property] %}<property name="{{property}}" value="{{server.properties[property]}}" />{% endif %}
+				{% endfor %}
+		</bean>
+{% endif %}
 {% endfor %}
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
