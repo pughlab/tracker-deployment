@@ -7,7 +7,7 @@
     - "vars/defaults.yml"
 
 - name: Tomcat webapp | Create directories
-  shell: mkdir -p {{ item.path }} creates={{ item.path }}
+  shell: mkdir -p {{ item.path }} creates={{ item.path }} mode=0755
   with_items:
     - { path: '{{webapp_directory}}' }
 
@@ -15,6 +15,7 @@
   get_url:
     url: "{{item.url}}"
     dest: "{{item.dest}}"
+    mode: '0644'
   with_items:
     - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" }
 

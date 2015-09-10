@@ -20,10 +20,9 @@ mysql_database_password: 'tracker'
 
 authentication:
   prompt: "Please log in using either your SIMS t-id or your RIS username as appropriate"
-
+  type: AD-MULTIPLE
   servers:
     - key: 'risLdapContext'
-      type: 'ActiveDirectory'
       properties:
         domain: 'ads.uhnresearch.ca'
         ldapHost: '192.168.198.100'
@@ -33,7 +32,6 @@ authentication:
         filterTemplate: '(userPrincipalName={0})'
 
     - key: 'simsLdapContext'
-      type: 'ActiveDirectory'
       properties:
         domain: 'uhn.ca'
         ldapHost: '142.224.16.52'
