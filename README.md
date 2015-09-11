@@ -26,14 +26,23 @@ building within the deployment process.
 
 To deploy, use something like:
 
-With Vagrant:
+#### With Vagrant:
 
     ansible-playbook -v -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant deploy.yml
 
-On a regular server:
+#### On a regular server:
 
     ansible-playbook -v -i inventory.txt ...connection args... deploy.yml
 
+#### On Samwise:
+
+This is what we use internally to deploy to our local production environment, and
+it's a good example of how to deploy from built releases on github to a totally
+non-privileged setup. Basically, it downloads and configures everything with a
+Jetty container, and then runs it using `nohup` from a command line. Less than
+ideal, but right for the current setup. 
+
+    ansible-playbook -v -i inventory.txt --limit samwise deploy.yml
 
 ### Notes
 
