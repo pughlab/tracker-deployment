@@ -1,0 +1,44 @@
+---
+
+## Configuration to redeploy the tracker on Samwise -- this has no admin rights
+## uses the Jetty standalone container and a nohup command to find and shutdown
+## any previous server, and then restart.
+
+install_database: false
+install_java: false
+install_user: false
+install_service: false
+
+deploy_standalone: true
+deploy_tomcat: false
+
+mysql_database_user: 'trevor'
+mysql_database_password: 'trevorlab'
+mysql_database_name: 'tracker_staging'
+
+webapp_directory: "{{ansible_env.HOME}}"
+helper_directory: "{{ansible_env.HOME}}"
+
+java_executable: '/mnt/work1/software/java/8/jdk1.8.0_45/bin/java'
+
+authentication:
+  prompt: "Please log in using either your SIMS t-id or your RIS username as appropriate"
+  type: AD-MULTIPLE
+  servers:
+    - key: 'risLdapContext'
+      properties:
+        domain: 'ads.uhnresearch.ca'
+        ldapHost: '192.168.198.100'
+        port: 389
+        timeout: 60
+        searchTemplate: 'OU=user,OU=accounts,DC=ads,DC=uhnresearch,DC=ca'
+        filterTemplate: '(userPrincipalName={0})'
+
+    - key: 'simsLdapContext'
+      properties:
+        domain: 'uhn.ca'
+        ldapHost: '142.224.16.52'
+        port: 389
+        timeout: 60
+        searchTemplate: 'OU=UHNPeople,DC=uhn,DC=ca'
+        filterTemplate: '(userPrincipalName={0})'
