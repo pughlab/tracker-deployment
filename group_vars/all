@@ -1,13 +1,15 @@
 ---
 
 tracker_version: '2.0.1-RC3'
-tracker_server_version: '1.0.0-RELEASE'
+tracker_server_version: '1.0.1-RELEASE'
 
 ## Source URLs for the tracker and server releases
 tracker_repository: 'https://github.com/pughlab/tracker'
 tracker_release_base: '{{tracker_repository}}/releases/download/{{tracker_version}}'
 tracker_release: '{{tracker_release_base}}/tracker-java-restlet-{{tracker_version}}.war'
 tracker_server_release: 'https://github.com/pughlab/tracker-server/releases/download/{{tracker_server_version}}/tracker-server-{{tracker_server_version}}.jar'
+
+java_executable: 'java'
 
 ## Default locations
 webapp_directory: "{{ansible_env.HOME}}/tracker"

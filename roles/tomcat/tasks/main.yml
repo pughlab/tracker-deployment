@@ -11,14 +11,6 @@
   with_items:
     - { path: '{{webapp_directory}}' }
 
-- name: Tomcat webapp | Get release files
-  get_url:
-    url: "{{item.url}}"
-    dest: "{{item.dest}}"
-    mode: '0644'
-  with_items:
-    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" }
-
 - name: Tomcat webapp | Get database schema
   get_url:
     url: "{{item.url}}"
