@@ -10,7 +10,7 @@ samwise             ansible_connection=ssh ansible_ssh_user=trevortracker ansibl
 ## Deploy: ansible-playbook -v -i inventory.txt --limit test deploy.yml
 
 [test]
-tpugh10             ansible_connection=local app_layout=test
+tpugh10             ansible_connection=local app_layout=standalone_test ansible_python_interpreter=/Users/stuartw/.pyenv/shims/python
 
 ## =============================================================================
 ## Deploy: ansible-playbook -v -i inventory.txt --limit oicr deploy.yml
