@@ -81,7 +81,7 @@
     </bean>
 {% for server in authentication.servers %}
 		<bean id="{{ server.key }}" class="ca.uhnresearch.pughlab.tracker.security.DomainLdapContext">
-			{% for property in ['domain', 'ldapHost', 'port', 'timeout', 'searchTemplate', 'filterTemplate' ] %}
+			{% for property in ['domain', 'ldapHost', 'ldapPort', 'timeout', 'searchTemplate', 'filterTemplate' ] %}
 			{% if server.properties[property] %}<property name="{{property}}" value="{{server.properties[property]}}" />{% endif %}
 			{% endfor %}
 		</bean>

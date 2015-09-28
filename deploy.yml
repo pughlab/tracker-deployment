@@ -15,4 +15,5 @@
     - { role: webapp, tags: [ 'webapp' ] }
     - { role: tomcat, tags: [ 'webapp' ], when: deploy_tomcat }
     - { role: service, tags: [ 'webapp' ], when: install_service }
+    - { role: standalone, tags: [ 'webapp' ], when: deploy_standalone }
     - { role: relaunch, tags: [ 'webapp' ], when: deploy_standalone }

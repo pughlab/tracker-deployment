@@ -23,8 +23,8 @@
     state: absent
   when: found_process.stdout != ""
 
-- name: Use the right Java if needed
-  shell: module load java/8
+## - name: Use the right Java if needed
+##  shell: module load java/8
 
 - name: Start new process
   shell: nohup {{java_executable}} -jar tracker-server-{{tracker_server_version}}.jar tracker.xml > nohup.out 2>&1& chdir={{webapp_directory}}

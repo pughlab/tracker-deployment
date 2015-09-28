@@ -15,8 +15,9 @@
   get_url:
     url: "{{item.url}}"
     dest: "{{item.dest}}"
+    sha256sum: "{{item.sha256sum}}"
   with_items:
-    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" }
+    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war", sha256sum: "{{tracker_release_checksum}}" }
 
 ## Only read the service container when we're installing the service
 
@@ -24,15 +25,24 @@
   get_url:
     url: "{{item.url}}"
     dest: "{{item.dest}}"
+    sha256sum: "{{item.sha256sum}}"
   when: install_service or deploy_standalone
   with_items:
-    - { url: "{{tracker_server_release}}", dest: "{{webapp_directory}}/tracker-server-{{tracker_server_version}}.jar" }
+    - { url: "{{tracker_server_release}}", dest: "{{webapp_directory}}/tracker-server-{{tracker_server_version}}.jar", sha256sum: "{{tracker_server_release_checksum}}" }
 
 - name: Webapp | Get database schema
   get_url:
     url: "{{item.url}}"
     dest: "{{item.dest}}"
+    sha256sum: "{{item.sha256sum}}"
   with_items:
-    - { url: "{{tracker_release_base}}/initialize_mysql.sql", dest: "{{webapp_directory}}/initialize_mysql.sql" }
+    - { url: "{{tracker_release_database}}", dest: "{{webapp_directory}}/initialize_mysql.sql", sha256sum: "{{tracker_release_database_checksum}}" }
+
+- name: Webapp | Create properties file
+  file:
+    path: "{{webapp_directory}}/tracker.properties"
+    state: 'touch'
+    mode: '0644'
+
 
 ## TODO Webapp | Update the database

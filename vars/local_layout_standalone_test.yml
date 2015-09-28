@@ -1,8 +1,9 @@
 ---
 
-## Configuration to redeploy the tracker on Samwise -- this has no admin rights
-## uses the Jetty standalone container and a nohup command to find and shutdown
-## any previous server, and then restart.
+webapp_directory: "{{ansible_env.HOME}}/test/tracker"
+helper_directory: "{{webapp_directory}}"
+
+webapp_service_config: "{{webapp_directory}}"
 
 install_database: false
 install_java: false
@@ -12,15 +13,8 @@ install_service: false
 deploy_standalone: true
 deploy_tomcat: false
 
-mysql_database_user: 'trevor'
-mysql_database_password: 'trevorlab'
-mysql_database_name: 'tracker_staging'
-
-webapp_directory: "{{ansible_env.HOME}}"
-helper_directory: "{{ansible_env.HOME}}"
-webapp_service_config: "{{ansible_env.HOME}}"
-
-java_executable: '/mnt/work1/software/java/8/jdk1.8.0_45/bin/java'
+mysql_database_user: 'tracker'
+mysql_database_password: 'tracker'
 
 authentication:
   prompt: "Please log in using either your SIMS t-id or your RIS username as appropriate"
