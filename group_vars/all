@@ -1,19 +1,19 @@
 ---
 
-tracker_version: '2.0.1-RC7'
+tracker_version: '2.1.0-RC2'
 tracker_server_version: '1.0.1-RELEASE'
 
 ## Source URLs for the tracker and server releases
 tracker_repository: 'https://github.com/pughlab/tracker'
 tracker_release_base: '{{tracker_repository}}/releases/download/{{tracker_version}}'
 tracker_release: '{{tracker_release_base}}/tracker-java-restlet-{{tracker_version}}.war'
-tracker_release_checksum: 'c2c1300c4aaaebd0fdcf14b5635ebda6ed0f6730fbf57453ed10182770e01987'
+tracker_release_checksum: '8431d8b701a3207977031b06b3396f6e464b8a394b915958112e5919ee661947'
 
 tracker_server_release: 'https://github.com/pughlab/tracker-server/releases/download/{{tracker_server_version}}/tracker-server-{{tracker_server_version}}.jar'
 tracker_server_release_checksum: '178d923dd82a6117b3dc73a825860781a006bbab0322754e8c0c4d3c038abf5f'
 
 tracker_release_database: '{{tracker_release_base}}/initialize_mysql.sql'
-tracker_release_database_checksum: '0799c31c77ba9a6eed5a4a316ac06ae612c43fd1d1162eb670db5fdcdf93a7f9'
+tracker_release_database_checksum: '5967121958231fcd081d9a681f6723d5f164e239f80e7ceee8b6c3c964191273'
 
 java_executable: 'java'
 
