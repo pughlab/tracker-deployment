@@ -1,0 +1,37 @@
+---
+## For OICR, set up a tunnel through chickenwire.oicr.on.ca
+## ssh -f -N -L 8022:tracker-stage.res.oicr.on.ca:22 swatt@chickenwire.oicr.on.ca
+## Test via: ssh -i ~/.ssh/oicr_rsa swatt@localhost -p 8022
+
+webapp_directory: "{{ansible_env.HOME}}/tracker"
+helper_directory: "{{ansible_env.HOME}}"
+
+tomcat_home: "/var/lib/tomcat7"
+tomcat_lib: "{{ansible_env.HOME}}"
+tomcat_context_config: "{{ansible_env.HOME}}/ROOT.xml"
+
+install_database: false
+install_java: false
+install_user: false
+install_service: false
+
+mysql_database_password: 'trevorlab'
+mysql_database_name: 'tracker_staging'
+mysql_database_user: 'trevor'
+
+deploy_standalone: false
+deploy_tomcat: true
+
+authentication:
+  ldap_server: 'ldap://ldap.oicr.on.ca'
+  search_base: 'dc=oicr,dc=on,dc=ca'
+
+authentication:
+  prompt: "Please log in using either your SIMS t-id or your RIS username as appropriate"
+  type: 'LDAP-SINGLE'
+  servers:
+    - key: 'ldapContext'
+      properties:
+        url: 'ldap://ldap.oicr.on.ca:389'
+        authenticationMechanism: 'DIGEST-MD5'
+        userDnTemplate: 'uid={0},ou=People,dc=oicr,dc=on,dc=ca'

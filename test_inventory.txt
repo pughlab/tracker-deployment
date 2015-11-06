@@ -3,3 +3,9 @@
 
 [samwise]
 localhost           ansible_connection=ssh ansible_ssh_port=2222 ansible_ssh_user=trevortracker ansible_ssh_private_key_file=/Users/stuartw/.ssh/samwise_tracker_rsa app_layout=samwise_test
+
+## =============================================================================
+## Deploy: ansible-playbook -v -i inventory.txt --limit oicr deploy.yml
+
+[oicr]
+tpugh10             ansible_connection=ssh ansible_ssh_port=2223 ansible_ssh_user=trevortracker ansible_ssh_private_key_file=/Users/stuartw/.ssh/samwise_tracker_rsa app_layout=oicr_test
