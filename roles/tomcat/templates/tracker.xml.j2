@@ -23,7 +23,15 @@ $CATALINA_HOME/conf/Catalina/localhost/ROOT.xml
               			WEB-INF/applicationContextScheduler.xml
                     file://{{helper_directory}}/applicationContext-security.xml
              "
-             override="false"/>
+             override="false" />
+
+  <Environment name="trackerProperties"
+               value="file://{{helper_directory}}/tracker.properties"
+               type="java.lang.String" />
+
+   <Environment name="trackerScript"
+                value="file://{{helper_directory}}/tracker.js"
+                type="java.lang.String" />
 
   <!-- Resources -->
   <Resource name="jdbc/TrackerDB"
