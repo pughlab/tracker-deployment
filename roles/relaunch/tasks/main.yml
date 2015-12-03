@@ -1,6 +1,6 @@
 ---
 - name: Find current process
-  shell: ps elx | grep "[j]ava -jar tracker-server" | tr -s ' ' | cut -d ' ' -f 3
+  shell: ps elx | grep "[j]ava -jar java-server" | tr -s ' ' | cut -d ' ' -f 3
   register: found_process
   ignore_errors: True
   always_run: yes
@@ -27,11 +27,11 @@
 ##  shell: module load java/8
 
 - name: Start new process
-  shell: nohup {{java_executable}} -jar tracker-server-{{tracker_server_version}}.jar tracker.xml > nohup.out 2>&1& chdir={{webapp_directory}}
+  shell: nohup {{java_executable}} -jar java-server-{{java_server_version}}.jar tracker.xml > nohup.out 2>&1& chdir={{webapp_directory}}
 
 ## Note the grep trick here to make sure grep doesn't actually find itself
 - name: Find new process
-  shell: ps elx | grep "[j]ava -jar tracker-server" | tr -s ' ' | cut -d ' ' -f 3
+  shell: ps elx | grep "[j]ava -jar java-server" | tr -s ' ' | cut -d ' ' -f 3
   register: started_process
   ignore_errors: True
 

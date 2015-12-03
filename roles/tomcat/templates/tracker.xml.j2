@@ -6,7 +6,7 @@ You probably want to put this somewhere like:
 $CATALINA_HOME/conf/Catalina/localhost/ROOT.xml
 -->
 
-<Context path="" docBase="{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war" reloadable="true">
+<Context path="" docBase="{{webapp_directory}}/tracker-webapp-{{tracker_version}}.war" reloadable="true">
   <Valve className="org.apache.catalina.valves.AccessLogValve"
          prefix="localhost_access_log." suffix=".txt"
          pattern="common"/>

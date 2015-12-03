@@ -17,7 +17,7 @@
     dest: "{{item.dest}}"
     sha256sum: "{{item.sha256sum}}"
   with_items:
-    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-java-restlet-{{tracker_version}}.war", sha256sum: "{{tracker_release_checksum}}" }
+    - { url: "{{tracker_release}}", dest: "{{webapp_directory}}/tracker-webapp-{{tracker_version}}.war", sha256sum: "{{tracker_release_checksum}}" }
 
 ## Only read the service container when we're installing the service
 
@@ -28,7 +28,6 @@
     sha256sum: "{{item.sha256sum}}"
   when: install_service or deploy_standalone
   with_items:
-    - { url: "{{tracker_server_release}}", dest: "{{webapp_directory}}/tracker-server-{{tracker_server_version}}.jar", sha256sum: "{{tracker_server_release_checksum}}" }
 
 - name: Webapp | Get database schema
   get_url:
@@ -37,6 +36,7 @@
     sha256sum: "{{item.sha256sum}}"
   with_items:
     - { url: "{{tracker_release_database}}", dest: "{{webapp_directory}}/initialize_mysql.sql", sha256sum: "{{tracker_release_database_checksum}}" }
+    - { url: "{{java_server_release}}", dest: "{{webapp_directory}}/java-server-{{java_server_version}}.jar", sha256sum: "{{java_server_release_checksum}}" }
 
 - name: Webapp | Create properties file
   file:
