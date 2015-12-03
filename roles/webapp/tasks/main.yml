@@ -28,14 +28,6 @@
     sha256sum: "{{item.sha256sum}}"
   when: install_service or deploy_standalone
   with_items:
-
-- name: Webapp | Get database schema
-  get_url:
-    url: "{{item.url}}"
-    dest: "{{item.dest}}"
-    sha256sum: "{{item.sha256sum}}"
-  with_items:
-    - { url: "{{tracker_release_database}}", dest: "{{webapp_directory}}/initialize_mysql.sql", sha256sum: "{{tracker_release_database_checksum}}" }
     - { url: "{{java_server_release}}", dest: "{{webapp_directory}}/java-server-{{java_server_version}}.jar", sha256sum: "{{java_server_release_checksum}}" }
 
 - name: Webapp | Create properties file
