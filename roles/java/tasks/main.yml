@@ -15,7 +15,7 @@
   when: ansible_os_family == "RedHat"
 
 - name: Java | Set default Java
-  shell: update-java-alternatives --set java-1.8.0-openjdk-amd64
+  shell: "update-java-alternatives --set java-1.8.0-openjdk-{{ansible_architecture}}"
   when: ansible_os_family == "Debian"
 
 # TODO select using alternatives on CentOS
