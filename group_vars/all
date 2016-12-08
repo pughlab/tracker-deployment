@@ -47,3 +47,4 @@ install_service: true
 
 deploy_standalone: true
 deploy_tomcat: false
+deploy_proxy: false
