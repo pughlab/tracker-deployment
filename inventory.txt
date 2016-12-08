@@ -4,16 +4,22 @@
 ## Deploy: ansible-playbook -v -i inventory.txt --limit samwise deploy.yml
 
 [samwise]
-samwise             ansible_connection=ssh ansible_ssh_user=trevortracker ansible_ssh_private_key_file=/Users/stuartw/.ssh/samwise_tracker_rsa app_layout=samwise
+samwise       ansible_connection=ssh ansible_ssh_user=trevortracker ansible_ssh_private_key_file=/Users/stuartw/.ssh/samwise_tracker_rsa app_layout=samwise
 
 ## =============================================================================
 ## Deploy: ansible-playbook -v -i inventory.txt --limit test deploy.yml
 
 [test]
-tpugh10             ansible_connection=local app_layout=standalone_test ansible_python_interpreter=/Users/stuartw/.pyenv/shims/python
+tpugh10       ansible_connection=local app_layout=standalone_test ansible_python_interpreter=/Users/stuartw/.pyenv/shims/python
 
 ## =============================================================================
 ## Deploy: ansible-playbook -v -i inventory.txt --limit oicr deploy.yml
 
 [oicr]
-localhost           ansible_connection=ssh ansible_ssh_port=8022 ansible_ssh_user=swatt ansible_ssh_private_key_file=/Users/stuartw/.ssh/oicr_rsa app_layout=oicr
+localhost     ansible_connection=ssh ansible_ssh_port=8022 ansible_ssh_user=swatt ansible_ssh_private_key_file=/Users/stuartw/.ssh/oicr_rsa app_layout=oicr
+
+
+## =============================================================================
+## Deploy: ansible-playbook -v -i inventory.txt --limit virtualbox deploy.yml
+[virtualbox]
+morag-virtualbox     ansible_connection=ssh app_layout=standalone_secure
