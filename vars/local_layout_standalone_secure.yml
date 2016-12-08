@@ -1,0 +1,30 @@
+---
+
+webapp_directory: "/usr/lib/{{webapp_service_name}}"
+helper_directory: "{{webapp_directory}}"
+webapp_service_config: "{{webapp_directory}}"
+
+install_database: true
+install_java: true
+install_user: true
+install_service: true
+
+deploy_standalone: true
+deploy_tomcat: false
+deploy_proxy: true
+
+mysql_database_user: 'tracker'
+mysql_database_password: 'tracker'
+
+authentication:
+  prompt: "Please log in using your RIS username"
+  type: AD-MULTIPLE
+  servers:
+    - key: 'risLdapContext'
+      properties:
+        domain: 'ads.uhnresearch.ca'
+        ldapHost: '192.168.198.100'
+        ldapPort: 389
+        timeout: 60
+        searchTemplate: 'OU=user,OU=accounts,DC=ads,DC=uhnresearch,DC=ca'
+        filterTemplate: '(userPrincipalName={0})'
